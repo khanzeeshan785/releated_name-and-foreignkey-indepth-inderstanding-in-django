@@ -13,10 +13,31 @@ class People(models.Model):
     # colors = models.ManyToManyField(colors)
     
 class PeopleAddress(models.Model):
-    people = models.ForeignKey(People, on_delete=models.CASCADE)
+    people = models.ForeignKey(People, on_delete=models.CASCADE,related_name = 'people_r')
     address = models.TextField()
     
+    
+    
 '''
+WITH RELATED NAME
+
+C:\Users\khanz\Desktop\all djngo project\DRW\test-drf\testenv2>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from testapp.models import *
+>>> obj = People.objects.first()
+>>> address_1 = obj.people_r.first()
+>>> address_1
+<PeopleAddress: PeopleAddress object (1)>
+>>> address_1.address 
+'fatehganj west bareilly 111'
+>>>
+
+
+'''
+'''
+WITHOUT RELATED NAME
 >>> from testapp.models import *  
 >>> obj = People.objects.first()
 >>> obj
